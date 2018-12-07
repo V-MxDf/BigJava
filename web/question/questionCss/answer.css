@@ -1,0 +1,19 @@
+#root {
+    margin-left: 300px;
+    margin-top: 100px;
+}
+/*问题和答案*/
+.questionAndAnswer{
+    border:1px solid #cccccc;
+    border-left: none;
+    border-right: none;
+    width: 500px;
+    height:150px;
+}
+/*用户信息*/
+.user_info{
+    width: 100%;
+    border: 1px solid red;
+    font-weight: bold;
+    margin-bottom: 5px;
+}

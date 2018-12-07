@@ -1,0 +1,265 @@
+body {
+    background-color: #F6F6F6;
+    margin: 0;
+    height: 1300px;
+}
+
+#root {
+    margin-left: 200px;
+
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}
+
+.Zhihu_top {
+    min-width: 200px;
+    width: 100%;
+    height: 50px;
+    box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
+    background-color: #ffffff;
+    position: fixed;
+}
+
+.Zhihu_font {
+
+    font-size: 32px;
+
+    font-family: 黑体, serif;
+    color: #0084FF;
+
+    line-height: 50px;
+    position: fixed;
+}
+.top_ul {
+    list-style: none;
+    white-space: nowrap;
+    width: auto;
+    margin: 0;
+    padding-left: 90px;
+}
+/*导航栏*/
+.top_nav {
+    width: 1000px;
+    height: 100%;
+    margin-left: 200px;
+}
+.top_ul li {
+    float: left;
+    display: inline;
+    /*display: inline-block;*/
+    width: 70px;
+    font-size: 18px;
+    height: 100%;
+
+}
+
+.top_ul li a {
+    line-height: 50px;
+}
+
+.top_Search {
+    width: 280px;
+    height: 30px;
+    background-color: #F6F6F6;
+    border: 0;
+    box-shadow: 1px 1px 2px 1px #EBEBEB;
+    margin-top: 10px;
+    padding-left: 10px;
+}
+.ask_question {
+    width: 100%;
+    height: 80px;
+    outline: none;
+    text-align: left;
+    padding-bottom: 60px;
+    padding-left: 50px;
+    margin-top: 10px;
+}
+
+.question_Btn {
+
+    width: 70px;
+    height: 35px;
+    border: 0;
+    background: #0084FF;
+    margin-left: 20px;
+    border-radius: 5px;
+    outline: none;
+    color: #fff;
+}
+/*用户头像*/
+.user_btn{
+    width: 70px;
+    height: 35px;
+    border: 0;
+    background: #0084FF;
+    margin-left: 20px;
+    border-radius: 5px;
+    outline: none;
+}
+/*提问弹窗*/
+.black_overlay {
+    display: none;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: #ccc;
+    z-index: 1;
+    -moz-opacity: 388;
+    opacity: .80;
+    filter: alpha(opacity=88);
+}
+
+/*弹窗设置*/
+.white_content {
+    display: none;
+    position: absolute;
+    top: 20%;
+    left: 32%;
+    width: 550px;
+    height: 300px;
+    padding: 20px;
+    background-color: #fff;
+    z-index: 2;
+    overflow: auto;
+}
+/*联想出来的div*/
+.query_value{
+    height: 30px;
+}
+.query_value:hover{
+    background-color: #cccccc;
+}
+
+.question_Btn:hover {
+    background-color: #086CD1;
+}
+
+.Zhihu_center {
+    float: left;
+
+    width: 694px;
+    min-width: 100px;
+
+    height: 100%;
+    box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
+    background-color: #ffffff;
+
+    margin-top: 60px;
+/*<!-- position: relative;
+--> <!-- margin-top: 10 px;
+--> <!-- margin-left: 100 px;
+-->*/
+}
+
+.Zhihu_right {
+
+    float: left;
+
+    width: 296px;
+    height: 550px;
+    background-color: #F6F6F6;
+    position: absolute;
+    left: 910px;
+    top: 60px;
+
+}
+
+.Zhihu_right_top {
+    width: 100%;
+    height: 100px;
+
+    box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
+    background-color: #fff;
+    position: relative;
+
+}
+
+/*右边第一个*/
+.write_answer {
+
+    text-align: center;
+    float: left;
+    width: 70px;
+    height: 100%;
+    margin-left: 20px;
+    line-height: 130px;
+    color: #444444;
+
+}
+
+.Zhihu_right_middle {
+    width: 100%;
+    height: 170px;
+    box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
+    background-color: #ffffff;
+
+    margin-top: 10px;
+
+}
+
+.live_ul {
+    list-style: none;
+    float: left;
+
+    margin-top: 0;
+    margin-left: 20px;
+    padding: 0px;
+}
+
+.live_ul li {
+    float: left;
+}
+
+.live_Book {
+    float: left;
+
+    color: #444444;
+    width: 70px;
+    height: 80px;
+
+    line-height: 120px;
+    text-align: center;
+    margin-left: 15px;
+
+}
+
+.live_Img {
+    margin-top: -50px;
+}
+
+.live_Font {
+    margin-left: -35px;
+
+}
+
+.live_Font_1 {
+    margin-left: -38px;
+}
+
+.Zhihu_right_bottom {
+    width: 100%;
+    height: 280px;
+    box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
+    background-color: #fff;
+    margin-top: 10px;
+
+}
+
+.my_Follow {
+    list-style: none;
+}
+
+.my_Follow li {
+    padding-top: 22px;
+    color: #444;
+    margin-left: 10px;
+}

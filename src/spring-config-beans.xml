@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="user" class="com.bigjava.bean.User"/>
+    <bean id="UserDao" class="com.bigjava.dao.UserDaoImpl.UserDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="logBiz" ref="logDao"/>
+        <property name="log" ref="log"/>
+    </bean>
+
+    <bean id="UserBiz" class="com.bigjava.biz.UserBizImpl.UserBizImpl">
+        <constructor-arg ref="UserDao"/>
+        <property name="questionBiz" ref="questionBiz"/>
+        <property name="answer" ref="answer"/>
+    </bean>
+    <bean id="UserAction" class="com.bigjava.action.UserAction" scope="prototype">
+    </bean>
+    <bean id="logDao" class="com.bigjava.biz.UserBizImpl.LogBizImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="log" class="com.bigjava.bean.Log"/>
+
+    <!--提问题-->
+    <bean id="questionDao" class="com.bigjava.dao.UserDaoImpl.QuestionDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="questionBiz" class="com.bigjava.biz.UserBizImpl.QuestionBizImpl">
+        <property name="questionDao" ref="questionDao"/>
+    </bean>
+    <bean id="answer" class="com.bigjava.bean.Answer"/>
+    <!--分类-->
+    <bean id="topic" class="com.bigjava.bean.Topic"/>
+
+    <!--分页-->
+    <bean id="pager" class="com.bigjava.bean.Pager"/>
+</beans>

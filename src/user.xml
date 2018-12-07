@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <constant name="struts.custom.i18n.resources" value="bigjava"/>
+    <constant name="struts.multipart.saveDir " value="G://Temp" />
+    <package name="user" extends="struts-default" namespace="/" strict-method-invocation="false">
+        <!--注册拦截器-->
+        <interceptors>
+            <interceptor name="loginInterceptor" class="interceptor"/>
+            <!--自定义拦截器栈-->
+            <interceptor-stack name="myStack">
+                <interceptor-ref name="defaultStack"/>
+                <interceptor-ref name="loginInterceptor"/>
+            </interceptor-stack>
+        </interceptors>
+
+    <!--    <default-action-ref name="error"/>
+        <action name="error">
+            <result>/errorPage/error.jsp</result>
+        </action>
+
+-->
+
+        <action name="loginInterceptor">
+            <result>userModule/index.jsp</result>
+            <result name="login">userModule/login.jsp</result>
+            <!--引用拦截器栈-->
+            <interceptor-ref name="loginInterceptor"/>
+        </action>
+        <!-- 通配符 -->
+        <action name="User_*" class="userAction" method="{1}">
+            <result name="{1}" >userModule/{1}.jsp</result>
+            <result name="index">userModule/index.jsp</result>
+            <result name="input">userModule/login.jsp</result>
+            <!--更改资料-->
+            <result name="modifyInfo">userModule/userInfo.jsp</result>
+            <!--激活跳转-->
+            <result name="verifyCode">userModule/userVerifyCode/success.jsp</result>
+
+            <!--注册失败跳转-->
+            <result name="register">register.jsp</result>
+
+            <!-- 注册成功跳转 -->
+            <result name="registerSUCCESS">userModule/login.jsp</result>
+            <!--<interceptor-ref name="loginInterceptor"/>-->
+        </action>
+
+
+        <!--验证码图片-->
+        <action name="verifyCode" class="verify" method="verifyCode">
+            <result name="verifyCode">userModule/login.jsp</result>
+        </action>
+
+</package>
+        <package name="login" extends="json-default" namespace="/">
+            <action name="login" class="com.bigjava.action.Test" method="test">
+                <result type="json" >
+                    <!--<param name="root">result</param>-->
+                </result>
+            </action>
+        </package>
+</struts>

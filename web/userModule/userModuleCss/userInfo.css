@@ -1,0 +1,46 @@
+body{
+    background-color: #F6F6F6;
+}
+/*中间*/
+.Header{
+    border:1px solid #cccccc;
+    width: 1000px;
+    height:1000px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+/*包住信息*/
+.user_info{
+    background-color: #ffffff;
+}
+/*用户信息左边*/
+.user_info_right{
+    border:1px solid red;
+    height:800px;
+    width:80%;
+    margin-top: 200px;
+    margin-left: 200px;
+}
+/*修改表单*/
+.Filed{
+    width:100%;
+    height:80px;
+    border-bottom: 1px solid #444444;
+    padding-top: 20px;
+}
+/*后台信息*/
+.Filed_info{
+    float: left;
+    width: 200px;
+    position: relative;
+    left:200px;
+    bottom:40px;
+    color: #6f6f6f;
+}
+/*修改按钮*/
+.update{
+    color: #086CD1;
+    border:none;
+    background: none;
+    padding-left: 30px;
+}

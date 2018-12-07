@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <constant name="struts.custom.i18n.resources" value="bigjava"/>
+    <package name="question" extends="struts-default" namespace="/" strict-method-invocation="false">
+        <action name="question_*" class="questionAction" method="{1}">
+            <result name="ask">userModule/index.jsp</result>
+            <result name="allTopic">question/topic.jsp</result>
+            <!--index show Question and answer-->
+            <result name="showQuestionAndAnswer">userModule/index.jsp</result>
+            <!--显示所有问题和答案  这是问题！！！！-->
+            <result name="showQuestion">question/answer.jsp</result>
+            <result name="showAnswer">question/invite.jsp</result>
+            <!--推荐用户问题-->
+            <result name="showByUserQuestion">question/question.jsp</result>
+        </action>
+    </package>
+
+    <!--json-->
+    <package name="ajax" extends="json-default" namespace="/">
+        <action name="ajax" class="questionAction" method="searchTopic">
+            <result type="json"/>
+        </action>
+        <action name="searchQuestion" class="questionAction" method="searchQuestion">
+            <result type="json"/>
+        </action>
+    </package>
+</struts>

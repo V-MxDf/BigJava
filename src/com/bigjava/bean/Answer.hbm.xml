@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.bigjava.bean.Answer" table="answer" schema="zhihu">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="answer_user_id" column="answer_user_id_fk"/>
+        <property name="answer_content" column="answer_content"/>
+        <property name="answer_question_id" column="answer_question_id_fk"/>
+        <property name="topic_id_fk" column="topic_id_fk"/>
+    </class>
+</hibernate-mapping>
