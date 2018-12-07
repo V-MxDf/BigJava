@@ -14,7 +14,7 @@ public class PaginationAction extends ActionSupport {
     private List<Question> list = new ArrayList<>();
     private QuestionBizImpl questionBiz;
     private int indexPage;
-
+//
     public List<Question> getList() {
         return list;
     }
