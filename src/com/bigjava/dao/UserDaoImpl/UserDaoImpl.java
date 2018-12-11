@@ -84,6 +84,23 @@ public class UserDaoImpl  extends HibernateDaoSupport implements UserDao {
     public void modifyInfo(User user) {
 //        String hql = "UPDATE User u set u";
 //        this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
-        this.getHibernateTemplate().getSessionFactory().getCurrentSession().update(user);
+        User user1 = this.getHibernateTemplate().getSessionFactory().getCurrentSession().get(User.class,user.getId());
+        if (user.getSex() != null) {
+            user1.setSex(user.getSex());
+        }
+        if (user.getImage() != null) {
+            user1.setImage(user.getImage());
+        }
+        if (user.getAddress() != null ){
+            user1.setAddress(user.getAddress());
+        }
+    }
+
+    //修改图片
+    @Override
+    public void modifyImage(String fileName) {
+        this.getHibernateTemplate().getSessionFactory()
+        .getCurrentSession().createQuery("UPDATE User u set u.image =: fileName")
+        .setParameter("fileName",fileName );
     }
 }

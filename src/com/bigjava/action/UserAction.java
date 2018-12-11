@@ -6,33 +6,76 @@ import com.bigjava.biz.UserBizImpl.QuestionBizImpl;
 import com.bigjava.biz.UserBizImpl.UserBizImpl;
 import com.bigjava.util.UserException;
 import com.opensymphony.xwork2.ActionSupport;
+import net.sf.json.JSONObject;
+import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 
 public class UserAction extends ActionSupport {
+    // 上传文件存放路径
+    private final static String uploadAdders = "/photo";
     private HttpServletRequest request = ServletActionContext.getRequest();
-
+    private HttpServletResponse response = ServletActionContext.getResponse();
     private User user;
     private UserBizImpl userBiz;
     private QuestionBizImpl questionBiz;
     private Map errorMap = new HashMap<>();
     private Set set = new HashSet();
-    // 封装上传文件域的属性
-    private File image;
-    // 封装上传文件类型的属性
-    private String imageContentType;
-    // 封装上传文件名的属性
-    private String imageFileName;
-    // 接受依赖注入的属性
-    private String savePath;
+    private File upload;
+    private String uploadContentType;
+    private String uploadFileName;
+    private String path;
+    private String res;
+
+    public String getRes() {
+        return res;
+    }
+
+    public void setRes(String res) {
+        this.res = res;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
     private List list = new ArrayList();
+
+
+    public File getUpload() {
+        return upload;
+    }
+
+    public void setUpload(File upload) {
+        this.upload = upload;
+    }
+
+    public String getUploadContentType() {
+        return uploadContentType;
+    }
+
+    public void setUploadContentType(String uploadContentType) {
+        this.uploadContentType = uploadContentType;
+    }
+
+    public String getUploadFileName() {
+        return uploadFileName;
+    }
+
+    public void setUploadFileName(String uploadFileName) {
+        this.uploadFileName = uploadFileName;
+    }
 
     public Set getSet() {
         return set;
@@ -58,38 +101,6 @@ public class UserAction extends ActionSupport {
         this.list = list;
     }
 
-    public File getImage() {
-        return image;
-    }
-
-    public void setImage(File image) {
-        this.image = image;
-    }
-
-    public String getImageContentType() {
-        return imageContentType;
-    }
-
-    public void setImageContentType(String imageContentType) {
-        this.imageContentType = imageContentType;
-    }
-
-    public String getImageFileName() {
-        return imageFileName;
-    }
-
-    public void setImageFileName(String imageFileName) {
-        this.imageFileName = imageFileName;
-    }
-
-    public String getSavePath() {
-        return ServletActionContext.getServletContext().getRealPath(savePath);
-    }
-
-    public void setSavePath(String savePath) {
-        this.savePath = savePath;
-    }
-
     public User getUser() {
         return user;
     }
@@ -101,26 +112,7 @@ public class UserAction extends ActionSupport {
     public void setUserBiz(UserBizImpl userBiz) {
         this.userBiz = userBiz;
     }
-    /*
-    @Override
-    public String execute() throws Exception {
-        if (userType == 1) {
-            dr = "/findAll.jsp";
-        } else if (userType == 0) {
-            dr = "userModule/index.jsp";
-        }
-        return SUCCESS;
-    }*/
 
-    /**
-     * 转跳错误信息
-     */
- /*   @Override
-    public void validate() {
-        if (user.getUsername() == null || user.getUsername().trim().isEmpty()) {
-            this.addFieldError("username", "用户名不能为空");
-        }
-    }*/
     public String findAll() {
         String value = request.getParameter("indexPage");
         int indexPage = 1;
@@ -162,12 +154,12 @@ public class UserAction extends ActionSupport {
             } else {
                 request.getSession().setAttribute("loginSuccess", user);
                 list = questionBiz.showQuestion();
-                for(Object o : list) {
+                for (Object o : list) {
                     Question question = (Question) o;
                     // Value is answerList
                     List list1 = questionBiz.showAnswerByQuestionID(question.getId());
                     set.add(list1);
-                    errorMap.put(question,set);
+                    errorMap.put(question, set);
                 }
                 return "index";
             }
@@ -208,54 +200,63 @@ public class UserAction extends ActionSupport {
         return "verifyCode";
     }
 
-    //更换头像
-    public String updateImg() {
-        FileOutputStream fos = null;
-        FileInputStream fis = null;
-        try {
-            // 建立文件输出流
-            System.out.println(getSavePath());
-            fos = new FileOutputStream(getSavePath() + "\\" + getImageFileName());
-            // 建立文件上传流
-            fis = new FileInputStream(getImage());
-            byte[] buffer = new byte[1024];
-            int len = 0;
-            while ((len = fis.read(buffer)) > 0) {
-                fos.write(buffer, 0, len);
-            }
-        } catch (Exception e) {
-            System.out.println("文件上传失败");
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if (fis != null) {
-                    try {
-                        fis.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
+    //预览
+    public String preViewImg() throws IOException {
+
+        response.setContentType("text/html;charset=utf-8");
+        Map<String, String> map = new HashMap();
+        User user1 = (User) request.getSession().getAttribute("loginSuccess");
+        path = ServletActionContext.getServletContext().getRealPath(uploadAdders);
+        //在服务器路径下判断是否有photo这个文件夹，没有就创建一个
+        //但是这个文件夹是临时的，如果项目重新部署的话会被删除
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdir();
         }
-        return "updateImg";
+        //为了避免文件名重复，这里选择用uuid重命名（肯定不会重复）
+        uploadFileName = UUID.randomUUID().toString() + "用户" + user1.getUsername() + uploadFileName;
+        System.out.println("uploadFileName" + uploadFileName);
+        request.getSession().setAttribute("uploadFileName", uploadFileName);
+        //将文件拷贝到服务器路径下
+        FileUtils.copyFile(upload, new File(file, uploadFileName));
+        map.put("path", "photo" + "/" + uploadFileName);
+        // 调用json对象的toString方法转换为字符串然后赋值给result
+        JSONObject jo = JSONObject.fromObject(map);
+        this.res = jo.toString();
+        //返回字符串
+        PrintWriter pw = response.getWriter();
+        pw.write(this.res);
+        pw.flush();
+        pw.close();
+        return null;
+    }
+
+    //修改资料
+    public String updateInfo() throws IOException {
+        response.setContentType("text/html;charset=utf-8");
+        Map<String, String> map = new HashMap<>();
+        String uploadFileName = (String) request.getSession().getAttribute("uploadFileName");
+        User user = (User) request.getSession().getAttribute("loginSuccess");
+        map.put("userPath", "photo" + "/" + uploadFileName);
+        JSONObject jsonObject = JSONObject.fromObject(map);
+        this.res = jsonObject.toString();
+        //返回字符串
+        PrintWriter pw = response.getWriter();
+        pw.write(this.res);
+        pw.flush();
+        pw.close();
+        user.setImage(uploadFileName);
+        userBiz.modifyInfo(user);
+        return null;
     }
 
     //个人信息
-    public String userInfo(){
+    public String userInfo() {
         User user1 = (User) request.getSession().getAttribute("loginSuccess");
         list = userBiz.showInfoById(user1.getId());
         return "userInfo";
     }
-    //修改资料
-    public String modifyInfo(){
-        userBiz.modifyInfo(user);
-        return "modifyInfo";
-    }
+
     public String language() {
         return INPUT;
     }
@@ -263,6 +264,6 @@ public class UserAction extends ActionSupport {
 
     //spring di
     public void setQuestionBiz(QuestionBizImpl questionBiz) {
-        this.questionBiz  = questionBiz;
+        this.questionBiz = questionBiz;
     }
 }

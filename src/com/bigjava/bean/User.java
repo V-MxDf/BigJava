@@ -8,6 +8,7 @@ import java.util.Objects;
 
 @Entity
 public class User {
+
     @Override
     public String toString() {
         return "User{" +
@@ -18,6 +19,9 @@ public class User {
                 ", email='" + email + '\'' +
                 ", state=" + state +
                 ", code='" + code + '\'' +
+                ", image='" + image + '\'' +
+                ", sex='" + sex + '\'' +
+                ", address='" + address + '\'' +
                 '}';
     }
 

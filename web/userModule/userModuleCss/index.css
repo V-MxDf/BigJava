@@ -24,6 +24,7 @@ a:hover{
     box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
     background-color: #ffffff;
     position: fixed;
+    z-index: 999;
 }
 
 .Zhihu_font {
@@ -170,6 +171,7 @@ a:hover{
     position: absolute;
     left: 910px;
     top: 60px;
+    z-index: 1;
 
 }
 

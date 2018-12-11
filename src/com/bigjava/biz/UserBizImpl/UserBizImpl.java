@@ -17,7 +17,7 @@ public class UserBizImpl implements UserBiz {
     public UserBizImpl (UserDaoImpl userDao) {
         this.userDao = userDao;
     }
-
+    public  UserBizImpl (){}
     /**
      * 分页
      *

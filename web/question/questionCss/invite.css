@@ -1,4 +1,5 @@
 body{
+    height: 1000px;
     background-color: #F6F6F6;
     margin: 0;
 }
@@ -12,7 +13,8 @@ a{
     height: 50px;
     box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
     background-color: #ffffff;
-    position: fixed;
+    z-index: 999;
+    position:fixed;
 }
 
 .Zhihu_font {
@@ -30,13 +32,14 @@ a{
     white-space: nowrap;
     width: auto;
     margin: 0;
-    padding-left: 90px;
+    padding-left: 140px;
 }
 /*导航栏*/
 .top_nav {
     width: 1000px;
     height: 100%;
     margin-left: 300px;
+    z-index: 999;
 }
 .top_ul li {
     float: left;
@@ -84,35 +87,46 @@ a{
 }
 
 .question_content {
-    border: 1px solid red;
     background-color: #ffffff;
     height:200px;
     width:100%;
+    box-shadow: 1px 1px 2px 1px #EBEBEB;
     position: relative;
-    top:55px;
+    top:50px;
 }
 /*问题*/
 .question_title{
-    border: 1px solid red;
-    width: 40%;
+    width: 720px;
     height: 140px;
     margin-left: 300px;
+    line-height: 130px;
     font-size: 1.5em;
     font-weight: bold;
 }
 /*问题里的页脚*/
 .question_footer{
-    border: 1px solid #000;
     height:55px;
-    width: 40%;
+    width: 720px;
     margin-left:300px;
+}
+/*所有答案div*/
+.answer_main{
+    position: relative;
+    left:310px;
+    top:50px;
 }
 /*答案*/
 .answer_content{
-    border:1px solid green;
-    position: relative;
-    left:200px;
-    top:500px;
+    background: white;
+    box-shadow:0 1px 3px rgba(26, 26, 26, .1) ;
+    height: 300px;
+    width: 730px;
+    margin-top: 10px;
+}
+/*回答用户*/
+.answer_user{
+    border:1px solid red;
+    width: 100%;
 }
 /*关注按钮*/
 .follow_btn{
@@ -136,4 +150,30 @@ a{
     background-color: white;
     color: #0084FF;
     margin-left: 10px;
+}
+/*弹出回答表框*/
+/*.comment{*/
+    /*border:1px solid #cccccc;*/
+    /*width: 200px;*/
+    /*height:100px;*/
+/*}*/
+.comment{
+    display: none;
+    width: 730px;
+    background: white;
+    margin-top: 30px;
+    box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
+    position:relative;
+    left:310px;
+    top:30px;
+}
+/*提交按钮*/
+.comment_Btn{
+    background: #086CD1;
+    border: none;
+    color: #ffffff;
+    border-radius: 5px;
+    width: 65px;
+    height:40px;
+    margin-left: 665px;
 }

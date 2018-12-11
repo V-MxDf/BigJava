@@ -16,9 +16,9 @@
 <body>
 <div class="question_top">
     <div class="top_nav">
-        <a href="http://www.zhihu.com" title="知乎" class="Zhihu_font">
+        <a href="userModule/index.jsp" title="知乎" class="Zhihu_font">
 
-            知乎
+            BigJava
 
         </a>
         <input type="text" class="top_Search" placeholder="搜索你感兴趣的内容吧~"/>

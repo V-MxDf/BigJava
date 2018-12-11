@@ -9,20 +9,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <script>
-        $(function () {
-            alert()
-        })
-    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <title>邀请回答</title>
     <link rel="stylesheet" href="question/questionCss/invite.css"/>
+    <style>
+
+    </style>
 </head>
-<body >
+<body>
 <div class="Zhihu_top" id="top_id">
     <div class="top_nav">
         <a href="http://www.zhihu.com" title="知乎" class="Zhihu_font">
 
-            知乎
+            BigJava
 
         </a>
 
@@ -56,13 +55,32 @@
         <button class="write_btn" type="button">写回答</button>
     </div>
 </div>
+<div class="comment">
+    <form action="" method="post">
+        <input type="text" placeholder="写回答..." style="width: 600px;height:150px;border: none;outline: none;padding-bottom: 120px;padding-left: 10px">
+        <input type="submit" value="评论" class="comment_Btn">
+    </form>
+</div>
 <%--答案--%>
-<div class="answer_content">
+<div class="answer_main">
     <s:iterator value="list" var="answer">
-        <div>
+        <div class="answer_content">
+            <%--用户名--%>
+            <div class="answer_user">
+            <s:iterator value="#answer.userList" var="user">
+                <s:property value="#user.username"/>
+            </s:iterator>
+            </div>
             <s:property value="answer_content"/>
         </div>
     </s:iterator>
 </div>
+<script>
+    $(function () {
+        $(".write_btn").click(function () {
+            $(".comment").slideToggle();
+        })
+    })
+</script>
 </body>
 </html>

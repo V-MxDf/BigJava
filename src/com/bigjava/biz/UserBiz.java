@@ -18,4 +18,5 @@ public interface UserBiz {
     public List<User> showInfoById(int id);
     //修改资料
     public void modifyInfo(User user);
+
 }

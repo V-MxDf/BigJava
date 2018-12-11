@@ -30,13 +30,15 @@
             <!--引用拦截器栈-->
             <interceptor-ref name="loginInterceptor"/>
         </action>
+
         <!-- 通配符 -->
         <action name="User_*" class="userAction" method="{1}">
             <result name="{1}" >userModule/{1}.jsp</result>
             <result name="index">userModule/index.jsp</result>
             <result name="input">userModule/login.jsp</result>
+            <!--<result name="updateImg">userModule/userInfo.jsp</result>-->
             <!--更改资料-->
-            <result name="modifyInfo">userModule/userInfo.jsp</result>
+            <!--<result name="updateInfo">userModule/userInfo.jsp</result>-->
             <!--激活跳转-->
             <result name="verifyCode">userModule/userVerifyCode/success.jsp</result>
 
@@ -46,6 +48,13 @@
             <!-- 注册成功跳转 -->
             <result name="registerSUCCESS">userModule/login.jsp</result>
             <!--<interceptor-ref name="loginInterceptor"/>-->
+            <!--拦截图片大小和类型-->
+            <!--<interceptor-ref name="fileUpload">-->
+                <!--<param name="allowedTypes">image/bmp,image/x-png,image/gif,image/jpeg,image/jpg</param>-->
+                <!--<param name="maximumSize">2048</param>-->
+            <!--</interceptor-ref>-->
+            <interceptor-ref name="defaultStack"/>
+
         </action>
 
 
@@ -55,11 +64,11 @@
         </action>
 
 </package>
-        <package name="login" extends="json-default" namespace="/">
-            <action name="login" class="com.bigjava.action.Test" method="test">
-                <result type="json" >
-                    <!--<param name="root">result</param>-->
-                </result>
+    <!--json-->
+        <package name="update" extends="json-default" namespace="/">
+            <action name="login" class="userAction" method="preViewImg">
+            </action>
+            <action name="update" class="userAction" method="updateInfo">
             </action>
         </package>
 </struts>

@@ -1,5 +1,7 @@
 package com.bigjava.bean;
 
+import java.util.List;
+
 public class Answer {
     private Integer id;
     private Integer answer_user_id;
@@ -7,7 +9,16 @@ public class Answer {
     private String answer_content;
     //分类
     private Integer topic_id_fk;
+    //回答答案用户
+    private List<User> userList;
 
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
 
     public Integer getTopic_id_fk() {
         return topic_id_fk;

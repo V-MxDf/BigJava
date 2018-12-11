@@ -129,9 +129,13 @@ public class QuestionAction extends ActionSupport  {
             }
         return "showQuestionAndAnswer";
     }
-    //By Question Id Show Answer
+    //根据问题显示答案
     public String showAnswer() throws UserException {
-        list = questionBiz.showAnswerByQuestionID(question.getId());
+        for (Object object: questionBiz.showAnswerByQuestionID(question.getId()) ) {
+            Answer answer = (Answer) object;
+           answer.setUserList(userBiz.showInfoById(answer.getAnswer_user_id()));
+           list.add(answer);
+        }
         questionTitle = question.getQuestionTitle();
         return "showAnswer";
     }
