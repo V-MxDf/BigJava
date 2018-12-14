@@ -89,4 +89,10 @@ public class QuestionDaoImpl extends HibernateDaoSupport implements QuestionDao 
                 .createQuery("from Question q where q.questionTitle like: questionTitle")
                 .setParameter("questionTitle","%"+text+"%").list();
     }
+    //添加答案
+
+    @Override
+    public void addAnswer(Answer answer) {
+        this.getHibernateTemplate().save(answer);
+    }
 }

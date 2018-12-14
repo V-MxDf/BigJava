@@ -12,13 +12,11 @@
 <head>
     <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="userModule/userModuleCss/index.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
     <%--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"--%>
           <%--integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"--%>
           <%--crossorigin="anonymous">--%>
-    <style type="text/css">
 
-    </style>
 </head>
 <%
     User user = (User) request.getSession().getAttribute("loginSuccess");
@@ -28,6 +26,7 @@
     }
 %>
 <body id="body">
+
 <div class="Zhihu_top" id="top_id">
     <div class="top_nav">
         <a href="http://www.zhihu.com" title="知乎" class="Zhihu_font">
@@ -57,7 +56,6 @@
 
     </div>
 </div>
-
 <div id="root">
 
     <div class="Zhihu_center">
@@ -156,7 +154,7 @@
     </div>
 </div>
 <div id="light" class="white_content">
-    <form action="question_askQuestion.action" method="post" id="question_form">
+    <form method="post" id="question_form">
         <input type="text" name="question.questionTitle" placeholder="写下你的问题" class="ask_question"
                id="search_question"/><br/>
         <p class="questionTitle_error" style="color: red;"></p>
@@ -166,7 +164,7 @@
         <p class="question_classification_error" style="color: red;"></p>
         <div class="q_con" style="width: 162px;border: 1px solid #cccccc"></div>
         <s:property value="exception.message"/>
-        <input type="submit" value="发布问题" onclick="return ask()"/>
+        <input type="button" value="发布问题" class="questionBtn"/>
     </form>
     <%--<a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">--%>
     <%--点这里关闭本窗口</a>--%>
@@ -176,11 +174,11 @@
 <div id="fade" class="black_overlay"></div>
 
 <script>
-    function ask() {
-        $("form").bind('submit', function () {
-            var v = $("#search_Topic").val();
-            if (v == "") {
-                $(".question_classification_error").html("请选择分类");
+    $(function () {
+        $(".questionBtn").click(function () {
+
+            if ($("#search_Topic").val() == "") {
+                $(".question_classification_error").html("请选择分类?");
                 $("#light").show();
                 return false;
             }
@@ -188,15 +186,29 @@
                 $(".questionTitle_error").html("请写下你的问题");
                 return false;
             }
-            return true;
-        });
-    }
+            $.ajax({
+                url:"ask.action",
+                type:"post",
+                dataType:"json",
+                data:$("#question_form").serialize(),
+                success:function (data) {
+                    alert("发布成功");
+                        $("#light").fadeOut(500, "swing");
+                        $("#fade").fadeOut(500, "swing");
+                        $("#body").css("overflow-x", "hidden");
 
-    $(function () {
+                },
+                error:function (data) {
+                    alert("filed");
+                }
+            })
+        });
         /*展开提交问题div*/
         $(".question_Btn").click(function () {
-            $("#light").fadeIn(500, "linear");
-            $("#fade").fadeIn(500, "linear");
+            $(".question_classification_error").html("");
+            $(".questionTitle_error").html("");
+            $("#light").fadeIn(500);
+            $("#fade").fadeIn(500);
         });
         /*收起*/
         $("#close").click(function () {
@@ -240,6 +252,7 @@
         //联想问题
         $("#search_question").keyup(function () {
             var title = $("#search_question").val();
+            $(".search_title_div").html("");
             var params = {
                 questionTitle: title
             };
@@ -274,7 +287,6 @@
             window.location = "User_userInfo.action";
         });
 
-
         //滚轮隐藏
         window.onscroll = function () {
             var oDiv = document.getElementById("float");
@@ -293,7 +305,7 @@
     });
 
 </script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+<%--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
@@ -301,7 +313,7 @@
         crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>--%>
 </body>
 </html>
 

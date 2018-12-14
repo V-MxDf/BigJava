@@ -7,7 +7,7 @@
     <constant name="struts.custom.i18n.resources" value="bigjava"/>
     <package name="question" extends="struts-default" namespace="/" strict-method-invocation="false">
         <action name="question_*" class="questionAction" method="{1}">
-            <result name="ask">userModule/index.jsp</result>
+            <!--<result name="ask">userModule/index.jsp</result>-->
             <result name="allTopic">question/topic.jsp</result>
             <!--index show Question and answer-->
             <result name="showQuestionAndAnswer">userModule/index.jsp</result>
@@ -26,6 +26,9 @@
         </action>
         <action name="searchQuestion" class="questionAction" method="searchQuestion">
             <result type="json"/>
+        </action>
+        <action name="ask" class="questionAction" method="askQuestion">
+            <result name="ask" type="json"/>
         </action>
     </package>
 </struts>

@@ -228,7 +228,7 @@
                     $(this).find(".update").hide();
                 }
             );
-//确认修改
+//确认修改 alert
             $(".sex_sub").click(function () {
                 cancel();
                 $.ajax({

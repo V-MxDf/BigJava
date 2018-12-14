@@ -1,6 +1,9 @@
 package com.bigjava.action;
 
-import com.bigjava.bean.*;
+import com.bigjava.bean.Answer;
+import com.bigjava.bean.Question;
+import com.bigjava.bean.Topic;
+import com.bigjava.bean.User;
 import com.bigjava.biz.UserBizImpl.QuestionBizImpl;
 import com.bigjava.biz.UserBizImpl.UserBizImpl;
 import com.bigjava.util.UserException;
@@ -8,6 +11,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -78,11 +82,15 @@ public class QuestionAction extends ActionSupport  {
     }
 
     //添加问题
-    public String askQuestion() throws UserException {
-        question.setAskQuestion_user_id(user.getId());
-        if (question.getQuestionTitle().equals("") || topic.getTopicTitle().equals("")) {
-            return "ask";
+    public String askQuestion() throws UserException, IOException {
+//        User user1 = (User)request.getSession().getAttribute("loginSuccess");
+        if (question.getQuestionTitle().trim().isEmpty()) {
+            result = "请填写问题";
         }
+        if (topic.getTopicTitle().trim().isEmpty()) {
+            result = "请填写话题";
+        }
+        question.setAskQuestion_user_id(user.getId());
         questionBiz.askQuestion(question,topic);
         return "ask";
     }
@@ -95,7 +103,7 @@ public class QuestionAction extends ActionSupport  {
     //联想话题
     public String searchTopic() throws UserException {
         list = questionBiz.searchTopic(result);
-        System.out.println(list);
+        System.out.println("话题"+list);
         return SUCCESS;
     }
     //联想问题
@@ -103,8 +111,7 @@ public class QuestionAction extends ActionSupport  {
         list = questionBiz.searchQuestion(questionTitle);
         return SUCCESS;
     }
-
-    //By Topic Id Show All Question And One Answer
+    //根据话题显示问题和一个答案
     public String showById() throws UserException {
         List<Answer> list4 = new ArrayList<>();
         questionList = questionBiz.showByQuestionID(topic.getId());
@@ -120,7 +127,7 @@ public class QuestionAction extends ActionSupport  {
         return "showQuestion";
     }
 
-    //Show all question in index and on answer
+    //主页显示答案和问题
     public String showQuestionAndAnswer() throws UserException {
             questionList = questionBiz.showQuestion();
             for(Object o : questionList) {
@@ -140,7 +147,11 @@ public class QuestionAction extends ActionSupport  {
         questionTitle = question.getQuestionTitle();
         return "showAnswer";
     }
+    //添加答案
+    public String addAnswer(){
 
+        return null;
+    }
     //spring DI
     public void setUserBiz(UserBizImpl userBiz) {
         this.userBiz = userBiz;

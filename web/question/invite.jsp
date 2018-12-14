@@ -9,12 +9,27 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script src="../js/jquery.min.js"></script>
     <title>邀请回答</title>
     <link rel="stylesheet" href="question/questionCss/invite.css"/>
-    <style>
+    <script type="text/javascript">
+        $(function () {
+            $("#answerForm").submit(function () {
+               $.ajax({
+                   url:"addAnswer.action",
+                   type:"post",
+                   data:$("#answerForm").serialize(),
+                   success:function (data) {
 
-    </style>
+                   },
+                   error:function (data) {
+                       alert("失败");
+                   }
+               })
+            });
+        })
+    </script>
 </head>
 <body>
 <div class="Zhihu_top" id="top_id">
@@ -56,8 +71,8 @@
     </div>
 </div>
 <div class="comment">
-    <form action="" method="post">
-        <input type="text" placeholder="写回答..." style="width: 600px;height:150px;border: none;outline: none;padding-bottom: 120px;padding-left: 10px">
+    <form id="answerForm" method="post">
+        <input type="text" placeholder="写回答..." style="width: 600px;height:150px;border: none;outline: none;padding-bottom: 120px;padding-left: 10px" name="ansewr.answer_content">
         <input type="submit" value="评论" class="comment_Btn">
     </form>
 </div>

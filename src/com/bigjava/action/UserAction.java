@@ -146,7 +146,7 @@ public class UserAction extends ActionSupport {
         String text = request.getParameter("imageText");
         String imageText = (String) request.getSession().getAttribute("imageText");
         try {
-            user = userBiz.login(user.getUsername(), user.getPassword());
+             user = userBiz.login(user.getUsername(), user.getPassword());
             if (user == null || user.getUsername().trim().isEmpty() || user.getPassword().trim().isEmpty()) {
                 errorMap.put("loginError", "请输入验证码");
             }
