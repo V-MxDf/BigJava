@@ -25,6 +25,7 @@
         request.getRequestDispatcher("userModule/login.jsp").forward(request, response);
     }
 %>
+<%----%>
 <body id="body">
 
 <div class="Zhihu_top" id="top_id">
