@@ -60,7 +60,15 @@
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 7.0.86" level="application_server_libraries" />
     <orderEntry type="library" name="Struts 2-2.5.14.1" level="project" />
     <orderEntry type="library" name="mysql-connector-java-5.1.46" level="project" />
-    <orderEntry type="library" name="javax.mail-1.6.2" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://E:/Java jar包/jquery/commons-beanutils-1.7.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="library" name="jstl" level="project" />
     <orderEntry type="library" name="Spring-4.3.18.RELEASE" level="project" />
     <orderEntry type="module-library" scope="TEST">
@@ -138,14 +146,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://E:/Java jar包/jquery/commons-beanutils-1.7.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" name="javax.mail-1.6.2" level="project" />
+    <orderEntry type="library" name="commons-beanutils-1.7.0" level="project" />
   </component>
 </module>

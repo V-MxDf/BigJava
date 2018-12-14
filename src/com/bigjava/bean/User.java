@@ -35,6 +35,33 @@ public class User {
     private String image;
     private String sex;
     private String address;
+    private String year;
+    private String month;
+    private String day;
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
 
     public String getSex() {
         return sex;
@@ -90,8 +117,11 @@ public class User {
         this.password = password;
     }
 
+
+
     @Basic
     @Column(name = "age")
+
     public Integer getAge() {
         return age;
     }
@@ -99,7 +129,6 @@ public class User {
     public void setAge(Integer age) {
         this.age = age;
     }
-
     @Basic
     @Column(name = "email", nullable = false, length = 45)
     public String getEmail() {

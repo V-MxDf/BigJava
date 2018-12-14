@@ -33,6 +33,15 @@ public class UserAction extends ActionSupport {
     private String uploadFileName;
     private String path;
     private String res;
+    private String userRes;
+
+    public String getUserRes() {
+        return userRes;
+    }
+
+    public void setUserRes(String userRes) {
+        this.userRes = userRes;
+    }
 
     public String getRes() {
         return res;
@@ -170,7 +179,7 @@ public class UserAction extends ActionSupport {
     }
 
     //注册
-    public String register() {
+    public String register() throws UserException {
         String rePassword = request.getParameter("RePassword");
 
         if (user.getUsername() == null || user.getUsername().trim().isEmpty()) {
@@ -202,7 +211,6 @@ public class UserAction extends ActionSupport {
 
     //预览
     public String preViewImg() throws IOException {
-
         response.setContentType("text/html;charset=utf-8");
         Map<String, String> map = new HashMap();
         User user1 = (User) request.getSession().getAttribute("loginSuccess");
@@ -215,7 +223,6 @@ public class UserAction extends ActionSupport {
         }
         //为了避免文件名重复，这里选择用uuid重命名（肯定不会重复）
         uploadFileName = UUID.randomUUID().toString() + "用户" + user1.getUsername() + uploadFileName;
-        System.out.println("uploadFileName" + uploadFileName);
         request.getSession().setAttribute("uploadFileName", uploadFileName);
         //将文件拷贝到服务器路径下
         FileUtils.copyFile(upload, new File(file, uploadFileName));
@@ -231,12 +238,14 @@ public class UserAction extends ActionSupport {
         return null;
     }
 
-    //修改资料
-    public String updateInfo() throws IOException {
+    //修改图片
+    public String updateImg() throws IOException, UserException {
         response.setContentType("text/html;charset=utf-8");
-        Map<String, String> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         String uploadFileName = (String) request.getSession().getAttribute("uploadFileName");
-        User user = (User) request.getSession().getAttribute("loginSuccess");
+        User user1 = (User) request.getSession().getAttribute("loginSuccess");
+//        user1.setImage(uploadFileName);
+        userBiz.updateImg(uploadFileName, user1.getId());
         map.put("userPath", "photo" + "/" + uploadFileName);
         JSONObject jsonObject = JSONObject.fromObject(map);
         this.res = jsonObject.toString();
@@ -245,10 +254,72 @@ public class UserAction extends ActionSupport {
         pw.write(this.res);
         pw.flush();
         pw.close();
-        user.setImage(uploadFileName);
-        userBiz.modifyInfo(user);
         return null;
     }
+
+    //修改资料
+    public String updateInfo() throws IOException, UserException {
+        response.setContentType("text/html;charset=utf-8");
+        Map<String, String> map = new HashMap<>();
+        User user1 = (User) request.getSession().getAttribute("loginSuccess");
+        String email = user1.getEmail();
+        //        获取当前年
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        //默认数据库的年龄
+        int y = user1.getAge();
+        if (user.getYear() != null && !user.getYear().equals("year")) {
+            y = Integer.parseInt(user.getYear());
+            int cunrrnt = year - y;
+            //当年龄为负数，设置为默认年龄
+            if (cunrrnt < 0) user1.setAge(y);
+            user1.setAge(cunrrnt);
+        } else {
+            user1.setAge(y);
+        }
+        //Sex为空则不做修改
+        if (user.getSex() == null) {
+            user1.setSex(user1.getSex());
+        } else {
+            user1.setSex(user.getSex());
+        }
+        //Address为空则不做修改
+        if (user.getAddress().equals("") || user.getAddress() == null) {
+            user1.setAddress(user1.getAddress());
+        } else {
+            user1.setAddress(user.getAddress());
+        }
+        //Email为空则不做任何修改
+        if (user.getEmail().trim().isEmpty()) {
+            user1.setEmail(email);
+        } else {
+            user1.setEmail(user.getEmail());
+        }
+        user1.setYear(user.getYear());
+        user1.setMonth(user.getMonth());
+        user1.setDay(user.getDay());
+        userBiz.modifyInfo(user1, email);
+
+        map.put("name", user1.getUsername());
+        map.put("sex", user1.getSex());
+        map.put("address", user1.getAddress());
+        map.put("age", String.valueOf(user1.getAge()));
+        map.put("year", user1.getYear());
+        map.put("month", user1.getMonth());
+        map.put("day", user1.getDay());
+        map.put("email", user1.getEmail());
+
+        JSONObject jsonObject = JSONObject.fromObject(map);
+        this.userRes = jsonObject.toString();
+        //返回字符串
+        PrintWriter pw = response.getWriter();
+        pw.write(this.userRes);
+        pw.flush();
+        pw.close();
+        System.out.println(userRes);
+        return null;
+    }
+
 
     //个人信息
     public String userInfo() {

@@ -68,7 +68,9 @@
         <package name="update" extends="json-default" namespace="/">
             <action name="login" class="userAction" method="preViewImg">
             </action>
-            <action name="update" class="userAction" method="updateInfo">
+            <action name="update" class="userAction" method="updateImg">
+            </action>
+            <action name="updateInfo" class="userAction" method="updateInfo">
             </action>
         </package>
 </struts>

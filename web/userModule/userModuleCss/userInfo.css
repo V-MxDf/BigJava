@@ -1,5 +1,120 @@
 body {
     background-color: #F6F6F6;
+    margin: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    color: red;
+}
+
+.Zhihu_top {
+    min-width: 200px;
+    width: 100%;
+    height: 50px;
+    box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
+    background-color: #ffffff;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}
+
+.Zhihu_font {
+    font-size: 32px;
+    font-family: 黑体, serif;
+    color: #0084FF;
+    line-height: 50px;
+    position: fixed;
+}
+
+.top_ul {
+    list-style: none;
+    white-space: nowrap;
+    width: auto;
+    margin: 0;
+    padding-left: 130px;
+}
+
+/*导航栏*/
+.top_nav {
+    width: 1000px;
+    height: 100%;
+    margin-left: 200px;
+}
+
+.top_ul li {
+    float: left;
+    display: inline;
+    /*display: inline-block;*/
+    width: 70px;
+    font-size: 18px;
+    height: 100%;
+
+}
+
+.top_ul li a {
+    line-height: 50px;
+}
+
+.top_Search {
+    width: 280px;
+    height: 30px;
+    background-color: #F6F6F6;
+    border: 0;
+    box-shadow: 1px 1px 2px 1px #EBEBEB;
+    margin-top: 10px;
+    padding-left: 10px;
+}
+
+.ask_question {
+    width: 100%;
+    height: 80px;
+    outline: none;
+    text-align: left;
+    padding-bottom: 60px;
+    padding-left: 50px;
+    margin-top: 10px;
+}
+
+.question_Btn {
+
+    width: 70px;
+    height: 35px;
+    border: 0;
+    background: #0084FF;
+    margin-left: 20px;
+    border-radius: 5px;
+    outline: none;
+    color: #fff;
+}
+
+/*用户头像*/
+.user_btn {
+    width: 70px;
+    height: 35px;
+    border: 0;
+    background: #0084FF;
+    margin-left: 20px;
+    border-radius: 5px;
+    outline: none;
+}
+
+/*弹出问题div*/
+.white_content {
+    display: none;
+    position: absolute;
+    top: 20%;
+    left: 32%;
+    width: 550px;
+    height: 300px;
+    padding: 20px;
+    background-color: #fff;
+    z-index: 4;
+    overflow: auto;
 }
 
 /*中间*/
@@ -18,7 +133,6 @@ body {
 
 /*用户信息左边*/
 .user_info_right {
-    border: 1px solid red;
     height: 800px;
     width: 80%;
     margin-top: 200px;
@@ -32,25 +146,73 @@ body {
     border-bottom: 1px solid #444444;
     padding-top: 20px;
 }
+.Filed_Email{
+    width: 100%;
+    height: 80px;
+    border-bottom: 1px solid #444444;
+    padding-top: 20px;
+}
 
 /*后台信息*/
 .Filed_info {
     float: left;
-    width: 200px;
+    width: 250px;
     position: relative;
     left: 200px;
-    bottom: 40px;
+    bottom: 35px;
     color: #6f6f6f;
 }
 
 /*修改按钮*/
 .update {
+    display: none;
     color: #086CD1;
     border: none;
     background: none;
-    padding-left: 30px;
+    font-size: 0.8em;
+    padding-left: 40px;
 }
-
+/*修改div*/
+.update_css {
+    width: 300px;
+    display: none;
+    position:relative;
+    bottom:60px;
+    left:200px;
+}
+input[type="radio"]{
+    margin-left: 10px;
+    margin-bottom: 30px;
+}
+/*提交修改按钮*/
+.sex_sub{
+    width: 60px;
+    height:35px;
+    border:none;
+    outline: none;
+    border-radius: 3px;
+    color: white;
+    background: #0084FF;
+}
+.email_sub{
+    width: 60px;
+    height:35px;
+    border:none;
+    outline: none;
+    border-radius: 3px;
+    color: white;
+    background: #0084FF;
+}
+/*取消按钮*/
+.cancel{
+    width: 60px;
+    height:35px;
+    border: 1px solid #0084FF;
+    outline: none;
+    border-radius: 3px;
+    color: #0084FF;
+    background: white;
+}
 /*弹出背景*/
 .fide {
     display: none;
@@ -60,7 +222,7 @@ body {
     width: 100%;
     height: 1800px;
     background-color: #646464;
-    z-index: 1;
+    z-index: 3;
     -moz-opacity: 388;
     opacity: .80;
     filter: alpha(opacity=88);
@@ -69,61 +231,69 @@ body {
 /*掩盖图片*/
 .show_back {
     display: none;
-    background: #6f6f6f;
-    height: 200px;
-    width: 200px;
-    position: absolute;
-    z-index: 9;
-    opacity: 0.6;
-    color: white;
+    background: #303030;
+    height: 180px;
+    width: 180px;
+    border-radius: 10px;
     text-align: center;
+    line-height: 300px;
+    position: absolute;
+    z-index: 1;
+    opacity: 0.8;
+    color: white;
 }
 
 /*图片*/
 #user_image {
     z-index: 1;
     height: 100%;
-    width: 100%
+    width: 100%;
+    border-radius: 10px;
 }
 
 /*整个图片提交div*/
 #main {
-    height: 200px;
-    width: 200px;
-    border: 1px solid red;
+    height: 180px;
+    width: 180px;
+    border-radius: 10px;
     position: relative;
-    top: 200px
+    top: 350px;
+    left: 10px;
 }
 
 /*弹出div*/
 .confirm_sub {
     display: none;
-    z-index: 100;
+    z-index: 4;
     height: 500px;
     width: 400px;
     background: white;
     position: absolute;
-    left: 550px;
+    left: 35%;
     top: 150px;
 }
+
 /*关闭div*/
-.close_div{
-   position: relative;
+.close_div {
+    position: relative;
     left: 50px;
     color: white;
 }
-.close{
+
+.close {
     color: white;
 }
+
 /*弹出图片*/
-#block_img{
+#block_img {
     width: 200px;
     height: 200px;
     margin-left: 100px;
     margin-top: 50px;
 }
+
 /*确认按钮*/
-#confirm_btn{
+#confirm_btn {
     height: 35px;
     width: 250px;
     border: none;
@@ -133,16 +303,19 @@ body {
     -moz-border-radius: 5px;
     border-radius: 3px;
     background: #086CD1;
-   position: relative;
-    top:180px;
-    left:80px;
+    position: relative;
+    top: 180px;
+    left: 80px;
 }
-#confirm_btn:hover{
+
+#confirm_btn:hover {
     background: #0084FF;
 }
+
 /*保存成功信息P*/
-.img_msg{
+.img_msg {
     color: green;
     padding-top: 100px;
     padding-left: 170px;
 }
+

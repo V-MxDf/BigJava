@@ -114,6 +114,7 @@ public class QuestionAction extends ActionSupport  {
             integerAnswerMap.put(question,list4);
             for (Answer answer : list4 ) {
                 list.add(userBiz.showInfoById(answer.getAnswer_user_id()));
+                System.out.println(list);
             }
         }
         return "showQuestion";

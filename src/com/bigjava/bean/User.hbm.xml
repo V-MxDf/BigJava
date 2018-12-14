@@ -16,7 +16,7 @@
             <column name="password" sql-type="varchar(45)" length="45"/>
         </property>
         <property name="age">
-            <column name="age" sql-type="int(11)" />
+            <column name="age" />
         </property>
         <property name="email">
             <column name="email" sql-type="varchar(45)" length="45"/>
@@ -32,5 +32,8 @@
         </property>
         <property name="sex" column="sex"/>
         <property name="address" column="address"/>
+        <property name="year" column="year"/>
+        <property name="month" column="month"/>
+        <property name="day" column="day"/>
     </class>
 </hibernate-mapping>

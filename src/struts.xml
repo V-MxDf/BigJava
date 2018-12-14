@@ -10,5 +10,4 @@
     <include file="Permissions.xml"/>
     <include file="question.xml"/>
     <include file="Pagination.xml"/>
-
 </struts>

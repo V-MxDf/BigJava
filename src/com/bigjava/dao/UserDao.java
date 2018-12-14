@@ -18,6 +18,6 @@ public interface UserDao {
     public List<User> findByUserId(int id);
     //修改信息
     public void modifyInfo(User user);
-    //修改图片
-    public void modifyImage(String fileName);
+   // 修改图片名称
+    public void modifyFileName(String fileName,int id);
 }

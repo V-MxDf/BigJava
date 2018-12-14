@@ -14,10 +14,14 @@ public class UserBizImpl implements UserBiz {
     private UserDaoImpl userDao;
     private QuestionBizImpl questionBiz;
     private Answer answer;
-    public UserBizImpl (UserDaoImpl userDao) {
+
+    public UserBizImpl(UserDaoImpl userDao) {
         this.userDao = userDao;
     }
-    public  UserBizImpl (){}
+
+    public UserBizImpl() {
+    }
+
     /**
      * 分页
      *
@@ -30,13 +34,25 @@ public class UserBizImpl implements UserBiz {
     }
 
     //登陆
-    public User login(String username, String password)  throws UserException {
-        return userDao.findByNameAndPassword(username,password);
+    public User login(String username, String password) throws UserException {
+        return userDao.findByNameAndPassword(username, password);
+    }
+
+    //效验邮箱并生成激活码 这个参数是为了比较和数据库值是否相同
+    public boolean verifyEmail(User user, String email) throws UserException {
+        if (user.getEmail().matches("^\\w+@(\\w+\\.)+\\w+$") && !user.getEmail().equals(email)) {
+            //生成激活码
+            String code = CodeUtil.generateUniqueCode();
+            user.setCode(code);
+            new Thread(new MailUtil(user.getEmail(), user.getCode())).start();
+            return true;
+        }
+        return false;
     }
 
     //注册
-    public boolean register(User user) {
-        if (user !=null) {
+    public boolean register(User user) throws UserException {
+        if (user != null) {
             if (user.getEmail().matches("^\\w+@(\\w+\\.)+\\w+$")) {
                 //生成激活码
                 String code = CodeUtil.generateUniqueCode();
@@ -54,16 +70,23 @@ public class UserBizImpl implements UserBiz {
         userDao.modifyState(code);
     }
 
-    //根据id显示所有用户信息  return List update User
+    //根据id显示用户信息
     @Override
     public List<User> showInfoById(int id) {
         return userDao.findByUserId(id);
     }
 
-    //修改资料
+    //修改资料 顺带检查邮箱
     @Override
-    public void modifyInfo(User user) {
+    public void modifyInfo(User user,String email) throws UserException {
+        verifyEmail(user,email);
         userDao.modifyInfo(user);
+    }
+
+    //修改头像
+    @Override
+    public void updateImg(String fileName, int id) {
+        userDao.modifyFileName(fileName,id );
     }
 
     public void setQuestionBiz(QuestionBizImpl questionBiz) {

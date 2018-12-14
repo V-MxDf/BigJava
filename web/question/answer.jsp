@@ -27,7 +27,7 @@
             <div class="questionAndAnswer">
             <h4>
                     <%--问题--%>
-                <a href="#">
+                <a href="question_showAnswer.action?question.id=<s:property value='#map.key.id'/>&question.questionTitle=<s:property value="#map.key.questionTitle"/>">
                     <s:property value="#map.key.questionTitle"/>
                 </a>
             </h4>
