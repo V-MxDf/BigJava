@@ -25,6 +25,14 @@
         <mapping class="com.bigjava.bean.Topic"/>
         <mapping resource="com/bigjava/bean/Topic.hbm.xml"/>
 
+        <mapping class="com.bigjava.bean.Follow"/>
+        <mapping resource="com/bigjava/bean/Follow.hbm.xml"/>
+
+        <mapping class="com.bigjava.bean.QuestionAndAnswer"/>
+        <mapping resource="com/bigjava/bean/QuestionAndAnswer.hbm.xml"/>
+
+        <mapping class="com.bigjava.bean.Comment"/>
+        <mapping resource="com/bigjava/bean/Comment.hbm.xml"/>
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 

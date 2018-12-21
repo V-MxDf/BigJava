@@ -148,5 +148,14 @@
     </orderEntry>
     <orderEntry type="library" name="javax.mail-1.6.2" level="project" />
     <orderEntry type="library" name="commons-beanutils-1.7.0" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://E:/Java jar包/hibernate/hibernate-ehcache-5.3.7.Final.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

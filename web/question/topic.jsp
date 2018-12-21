@@ -16,7 +16,7 @@
 <body>
 <div class="question_top">
     <div class="top_nav">
-        <a href="userModule/index.jsp" title="知乎" class="Zhihu_font">
+        <a href="${pageContext.request.contextPath}/index.jsp" title="知乎" class="Zhihu_font">
 
             BigJava
 
@@ -25,7 +25,7 @@
 
         <ul class="top_ul">
             <li>
-                <a href="#">首页</a>
+                <a href="User_*.action">首页</a>
             </li>
             <li>
                 <a href="#">发现</a>
@@ -46,9 +46,9 @@
 <div class="content">
     <s:iterator value="list" var="topic">
         <div class="topic_content">
-            <a href="question_showById.action?topic.id=<s:property value='id'/>" class="a_c" name="">
+            <a href="question_showById.action?topic.id=<s:property value='id'/>" class="topic_A" name="">
                 <s:property value="#topic.topicTitle"/>
-            </a
+            </a>
         </div>
     </s:iterator>
 </div>

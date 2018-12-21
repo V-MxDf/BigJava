@@ -1,9 +1,6 @@
 package com.bigjava.biz;
 
-import com.bigjava.bean.Answer;
-import com.bigjava.bean.Pager;
-import com.bigjava.bean.Question;
-import com.bigjava.bean.Topic;
+import com.bigjava.bean.*;
 import com.bigjava.util.UserException;
 
 import java.util.List;
@@ -35,4 +32,21 @@ public interface QuestionBiz {
 
     //联想问题
     public List<Question> searchQuestion(String text);
+
+    //根据id查询所有问题
+    public List<Question> byIdShowQuestion(int id);
+
+    //添加答案
+    public void addAnswer(Answer answer);
+
+    //    关注问题
+    public void followQuestion(Follow follow);
+    //取消关注
+    public void unFollow(Follow follow);
+//    点赞
+    void liked(Answer answer);
+//    点赞数
+    Answer likedNum(Answer answer);
+    //  查询关注状态
+    public Follow findFollowState(int userId,int questionId);
 }

@@ -5,6 +5,7 @@
 <hibernate-mapping>
 
     <class name="com.bigjava.bean.User" table="user" schema="zhihu">
+        <cache usage="read-write" region="com.bigjava.bean.User"/>
         <id name="id">
             <column name="id" sql-type="int(11)"/>
             <generator class="native"/>

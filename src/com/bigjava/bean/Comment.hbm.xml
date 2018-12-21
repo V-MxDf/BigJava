@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.bigjava.bean.Comment" table="comment" schema="zhihu">
+        <id name="id">
+            <column name="id"/>
+            <generator class="native"/>
+        </id>
+        <property name="userId" column="user_id"/>
+        <property name="answerId" column="answer_id"/>
+        <property name="commentContent" column="comment_content"/>
+    </class>
+</hibernate-mapping>

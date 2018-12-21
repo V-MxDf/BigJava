@@ -12,6 +12,7 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="question/questionCss/question.css"/>
+    <script src="../js/jquery.min.js"></script>
 </head>
 <body>
 <div class="question_top">
@@ -25,7 +26,8 @@
 
         <ul class="top_ul">
             <li>
-                <a href="#">首页</a>
+                <p id="zt">首页</p>
+
             </li>
             <li>
                 <a href="#">发现</a>
@@ -44,12 +46,12 @@
 </div>
 
 <div class="content">
-    <s:iterator value="list" var="pager">
+    <s:iterator value="list" var="question">
+        <s:debug></s:debug>
         <div class="questionTitle">
-                        <a href="question_showAnswer.action?question.id=<s:property value='id'/>&question.questionTitle=<s:property value="questionTitle"/>">
-                            <s:property value="#pager.questionTitle"/>
+                        <a href="question_showAnswer.action?question.id=<s:property value='id'/>">
+                            <s:property value="questionTitle"/>
                         </a>
-
                         <div class="invite">
                                 邀请你来回答
                             <span><s:property value=""/></span>
@@ -61,5 +63,12 @@
     <a href="pagination.action?pager.indexPage=<s:property value="pager.indexPage+1"/> ">下一页</a>
 </div>
 <s:debug></s:debug>
+<script type="text/javascript">
+    $(function () {
+        $("#zt").click(function () {
+           window.location.href="index.jsp";
+        });
+    })
+</script>
 </body>
 </html>

@@ -145,6 +145,7 @@ public class UserAction extends ActionSupport {
     public String login() {
         String text = request.getParameter("imageText");
         String imageText = (String) request.getSession().getAttribute("imageText");
+        List answerList = new ArrayList();
         try {
              user = userBiz.login(user.getUsername(), user.getPassword());
             if (user == null || user.getUsername().trim().isEmpty() || user.getPassword().trim().isEmpty()) {
@@ -166,9 +167,11 @@ public class UserAction extends ActionSupport {
                 for (Object o : list) {
                     Question question = (Question) o;
                     // Value is answerList
-                    List list1 = questionBiz.showAnswerByQuestionID(question.getId());
-                    set.add(list1);
-                    errorMap.put(question, set);
+                    answerList = questionBiz.showAnswerByQuestionID(question.getId());
+//                    为了拿一条答案 如果答案没有,直接保存map 有多个只拿第一个下标
+                    if (answerList.size() != 0) {
+                        errorMap.put(question, Collections.singletonList(answerList.get(0)));
+                    }
                 }
                 return "index";
             }

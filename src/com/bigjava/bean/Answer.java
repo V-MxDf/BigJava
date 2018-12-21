@@ -11,6 +11,16 @@ public class Answer {
     private Integer topic_id_fk;
     //回答答案用户
     private List<User> userList;
+//    赞同数
+    private Integer liked;
+
+    public Integer getLiked() {
+        return liked;
+    }
+
+    public void setLiked(Integer liked) {
+        this.liked = liked;
+    }
 
     public List<User> getUserList() {
         return userList;
@@ -68,6 +78,8 @@ public class Answer {
                 ", answer_question_id=" + answer_question_id +
                 ", answer_content='" + answer_content + '\'' +
                 ", topic_id_fk=" + topic_id_fk +
+                ", userList=" + userList +
+                ", liked=" + liked +
                 '}';
     }
 }

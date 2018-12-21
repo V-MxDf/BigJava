@@ -12,25 +12,27 @@
 >  <!--根据set名称匹配,无需rel引用-->
     <!--配置数据源-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/zhihu" />
-        <property name="username" value="root" />
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/zhihu"/>
+        <property name="username" value="root"/>
         <property name="password" value="xdf1946"/>
     </bean>
 
     <!--配置sessionFactory-->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="configLocations" value="classpath:hibernate.cfg.xml"/>
-            <property name="dataSource" ref="dataSource"/>
+        <property name="dataSource" ref="dataSource"/>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <prop key="hibernate.jdbc.batch_size">20</prop>
                 <prop key="cache.use_query_cache">true</prop>
+                <!--<prop key="hibernate.cache.use_second_level_cache">true</prop>-->
+
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
-                <prop key="org.hibernate.cache.ehcache.EhCacheRegionFactory">
-                    org.hibernate.cache.ehcache.EhCacheRegionFactory
-                </prop>
+                <!--<prop key="hibernate.cache.query_cache_factory">-->
+                <!--org.hibernate.cache.ehcache.internal.SingletonEhcacheRegionFactory-->
+                <!--</prop>-->
             </props>
         </property>
     </bean>
@@ -61,18 +63,29 @@
         <property name="userBiz" ref="UserBiz"/>
         <property name="questionBiz" ref="questionBiz"/>
     </bean>
-    <bean id="verify" class="com.bigjava.action.VerifyCodeAction" scope="prototype">
-    </bean>
-    <bean id="permissions" class="com.bigjava.action.UserAction" scope="prototype">
-    </bean>
-    <bean name="question" class="com.bigjava.bean.Question" />
+
+    <bean id="verify" class="com.bigjava.action.VerifyCodeAction" scope="prototype"/>
+
+    <bean id="permissions" class="com.bigjava.action.UserAction" scope="prototype"/>
+
+    <bean name="question" class="com.bigjava.bean.Question"/>
+
     <bean id="questionAction" class="com.bigjava.action.QuestionAction" scope="prototype">
-        <property name="questionBiz" ref="questionBiz" />
+        <property name="questionBiz" ref="questionBiz"/>
         <property name="userBiz" ref="UserBiz"/>
     </bean>
+
     <bean id="pagination" class="com.bigjava.action.PaginationAction" scope="prototype">
-        <property name="questionBiz" ref="questionBiz" />
+        <property name="questionBiz" ref="questionBiz"/>
     </bean>
+
+    <bean id="UserAction" class="com.bigjava.action.UserAction" scope="prototype"/>
+
+    <bean id="commentAction" class="com.bigjava.action.CommentAction" scope="prototype">
+        <property name="userBiz"  ref="UserBiz"/>
+        <property name="commentBiz" ref="commentBiz"/>
+    </bean>
+
     <!--拦截器-->
     <bean id="interceptor" class="com.bigjava.interceptor.userInterceptor"/>
 </beans>

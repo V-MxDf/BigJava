@@ -12,5 +12,6 @@
         <property name="answer_content" column="answer_content"/>
         <property name="answer_question_id" column="answer_question_id_fk"/>
         <property name="topic_id_fk" column="topic_id_fk"/>
+        <property name="liked" column="liked"/>
     </class>
 </hibernate-mapping>

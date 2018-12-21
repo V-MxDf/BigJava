@@ -20,4 +20,5 @@ public interface UserDao {
     public void modifyInfo(User user);
    // 修改图片名称
     public void modifyFileName(String fileName,int id);
+
 }

@@ -16,6 +16,11 @@
             <result name="showAnswer">question/invite.jsp</result>
             <!--推荐用户问题-->
             <result name="showByUserQuestion">question/question.jsp</result>
+            <result name="addAnswer">question/invite.jsp</result>
+            <!--关注问题-->
+            <result name="follow">question/invite.jsp</result>
+            <!--取消关注-->
+            <result name="unFollow">question/invite.jsp</result>
         </action>
     </package>
 
@@ -29,6 +34,17 @@
         </action>
         <action name="ask" class="questionAction" method="askQuestion">
             <result name="ask" type="json"/>
+        </action>
+        <!--点赞-->
+        <action name="liked" class="questionAction" method="liked">
+            <result name="liked" type="json"/>
+        </action>
+    </package>
+
+    <!--评论-->
+    <package name="comment" extends="json-default" namespace="/" >
+        <action name="comment" class="commentAction" method="addComment">
+            <result name="addComment" type="json"/>
         </action>
     </package>
 </struts>

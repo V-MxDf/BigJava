@@ -139,6 +139,21 @@ a{
     color: #fff;
     margin-left: 10px;
 }
+/*已关注按钮*/
+.follow{
+    width: 80px;
+    height: 40px;
+    border: 0;
+    background: #6f6f6f;
+    border-radius: 3px;
+    outline: none;
+    color: #fff;
+    margin-left: 10px;
+}
+/*不显示*/
+.noDisplay{
+    display: none;
+}
 /*写回答*/
 .write_btn{
     width: 80px;
@@ -176,4 +191,10 @@ a{
     width: 65px;
     height:40px;
     margin-left: 665px;
+}
+/*用户图片*/
+#user_image {
+    height:45px;
+    width:45px;
+    border-radius:5px;
 }

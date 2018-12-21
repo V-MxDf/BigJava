@@ -23,37 +23,33 @@
 <body>
 <div id="root">
     <%--循环用户信息--%>
-        <s:iterator value="integerAnswerMap" var="map">
-            <div class="questionAndAnswer">
-            <h4>
-                    <%--问题--%>
-                <a href="question_showAnswer.action?question.id=<s:property value='#map.key.id'/>&question.questionTitle=<s:property value="#map.key.questionTitle"/>">
-                    <s:property value="#map.key.questionTitle"/>
-                </a>
-            </h4>
-            <%--用户值--%>
+    <%--问题和答案是map key 问题 value 答案--%>
+    <s:iterator value="integerAnswerMap" var="map">
+        <div class="questionAndAnswer">
+        <h4>
+                <%--问题--%>
+            <a href="question_showAnswer.action?question.id=<s:property value='#map.key.id'/>">
+                <s:property value="#map.key.questionTitle"/>
+            </a>
+        </h4>
+        <%--循环答案List--%>
+        <s:iterator value="#map.value" var="value" status="i">
+            <div style="">
+                <s:iterator value="list" var="user">
 
-            <%--循环答案List--%>
-            <s:iterator value="#map.value" var="value" status="i">
-                <div style="">
-                    <s:if test="%{#i.index == 0}">
-                        <%--根据答案显示用户--%>
-                        <s:iterator value="list" var="user">
-                            <s:iterator value="#user" var="u">
-                                <s:if test="%{#value.answer_user_id == #u.id}">
-                                    <div class="user_info">
-                                    <s:property value="#u.username"/>
-                                    </div>
-                                </s:if>
-                            </s:iterator>
-                        </s:iterator>
-                        <s:property value="#value.answer_content"/>
-                    </s:if>
+                <s:if test="%{#value.answer_user_id == #user.id}">
+                    <s:property value="#user.id"/>
+                </s:if>
+                </s:iterator>
 
-                </div>
-                </div>
-            </s:iterator>
+
+                <s:property value="#value.answer_content"/>
+            </div>
+            </div>
         </s:iterator>
+    </s:iterator>
+<s:debug></s:debug>
+
 </div>
 <script>
 

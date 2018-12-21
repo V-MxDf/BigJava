@@ -76,7 +76,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
     //根据id显示所有信息
     @Override
     public List<User> findByUserId(int id) {
-        return this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery("FROM User u where u.id =: id")
+        return this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery("FROM User u where u.id =: id order by u.id")
                 .setParameter("id", id).list();
     }
 
